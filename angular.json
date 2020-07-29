@@ -1,0 +1,168 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "logger": {
+      "projectType": "library",
+      "root": "projects/logger",
+      "sourceRoot": "projects/logger/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/logger/tsconfig.lib.json",
+            "project": "projects/logger/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/logger/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/logger/src/test.ts",
+            "tsConfig": "projects/logger/tsconfig.spec.json",
+            "karmaConfig": "projects/logger/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/logger/tsconfig.lib.json",
+              "projects/logger/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "logger-tester": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/logger-tester",
+      "sourceRoot": "projects/logger-tester/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/logger-tester",
+            "index": "projects/logger-tester/src/index.html",
+            "main": "projects/logger-tester/src/main.ts",
+            "polyfills": "projects/logger-tester/src/polyfills.ts",
+            "tsConfig": "projects/logger-tester/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/logger-tester/src/favicon.ico",
+              "projects/logger-tester/src/assets"
+            ],
+            "styles": [
+              "projects/logger-tester/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/logger-tester/src/environments/environment.ts",
+                  "with": "projects/logger-tester/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "logger-tester:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "logger-tester:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "logger-tester:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/logger-tester/src/test.ts",
+            "polyfills": "projects/logger-tester/src/polyfills.ts",
+            "tsConfig": "projects/logger-tester/tsconfig.spec.json",
+            "karmaConfig": "projects/logger-tester/karma.conf.js",
+            "assets": [
+              "projects/logger-tester/src/favicon.ico",
+              "projects/logger-tester/src/assets"
+            ],
+            "styles": [
+              "projects/logger-tester/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/logger-tester/tsconfig.app.json",
+              "projects/logger-tester/tsconfig.spec.json",
+              "projects/logger-tester/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/logger-tester/e2e/protractor.conf.js",
+            "devServerTarget": "logger-tester:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "logger-tester:serve:production"
+            }
+          }
+        }
+      }
+    }},
+  "defaultProject": "logger"
+}

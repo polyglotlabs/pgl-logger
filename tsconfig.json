@@ -1,0 +1,35 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": false,
+    "noFallthroughCasesInSwitch": false,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "importHelpers": true,
+    "target": "es2015",
+    "lib": [
+      "es2018",
+      "dom"
+    ],
+    "paths": {
+      "logger": [
+        "dist/logger/logger",
+        "dist/logger"
+      ]
+    }
+  },
+  "angularCompilerOptions": {
+    // "enableIvy": false,
+    "fullTemplateTypeCheck": true,
+    "strictInjectionParameters": true
+  }
+}

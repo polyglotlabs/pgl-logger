@@ -1,0 +1,15 @@
+{
+    "genGetSet.ignoredDictionaryList": [
+
+        "vscode",
+        "tsconfig"
+    ],
+    "files.exclude": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/CVS": true,
+        "**/.DS_Store": true,
+        "**/*.go": true
+    }
+}
